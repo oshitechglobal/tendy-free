@@ -135,38 +135,100 @@
         
         .cta-group { display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; margin-bottom: var(--space-3xl); }
         
-        .signup-form {
-            background: var(--color-neutral-50);
+        /* MODAL STYLES */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s ease-in;
+            overflow-y: auto;
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
             padding: var(--space-xl);
             border-radius: var(--radius-lg);
-            max-width: 400px;
-            margin: var(--space-2xl) auto;
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+            animation: slideUp 0.3s ease-out;
+            margin: var(--space-2xl) 0;
         }
         
-        .form-group { margin-bottom: var(--space-md); }
-        label { display: block; margin-bottom: var(--space-sm); font-weight: 600; color: var(--color-text-primary); font-size: var(--font-size-sm); }
-        input[type="email"], input[type="text"] {
-            width: 100%;
-            padding: var(--space-md);
-            border: 1px solid var(--color-neutral-300);
-            border-radius: var(--radius-md);
-            font-family: var(--font-primary);
-            font-size: var(--font-size-base);
-        }
-        input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(27, 73, 101, 0.1); }
-        
-        .form-submit {
-            width: 100%;
-            padding: var(--space-md);
-            background-color: var(--color-primary);
-            color: white;
-            border: none;
-            border-radius: var(--radius-md);
-            font-weight: 600;
+        .modal-close {
+            position: absolute;
+            right: var(--space-lg);
+            top: var(--space-lg);
+            font-size: var(--font-size-2xl);
+            font-weight: bold;
+            color: var(--color-text-secondary);
             cursor: pointer;
-            transition: background-color 0.3s;
+            background: none;
+            border: none;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            transition: all 0.2s;
+            z-index: 1001;
         }
-        .form-submit:hover { background-color: var(--color-primary-light); }
+        
+        .modal-close:hover {
+            background-color: var(--color-neutral-100);
+            color: var(--color-text-primary);
+        }
+        
+        .modal-title {
+            color: var(--color-primary);
+            margin-bottom: var(--space-lg);
+            margin-right: var(--space-2xl);
+            font-size: var(--font-size-2xl);
+        }
+        
+        .google-form-container {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+        
+        .google-form-container iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
         
         .features { padding: var(--space-4xl) var(--space-xl); background-color: var(--color-neutral-50); }
         .section-title { text-align: center; margin-bottom: var(--space-3xl); }
@@ -225,6 +287,8 @@
             .button { width: 100%; text-align: center; }
             nav ul { display: none; }
             .proof-stats { grid-template-columns: 1fr; }
+            .modal-content { width: 95%; max-height: 95vh; padding: var(--space-lg); }
+            .google-form-container iframe { height: 700px; }
         }
         
         @keyframes slideIn {
@@ -250,18 +314,29 @@
             <p>Free SAM.gov contract intelligence with smart matching, real-time alerts, and automated tracking. All the tools you need to find qualified opportunities—no credit card required.</p>
             
             <div class="cta-group">
-                <button class="button button-primary" onclick="document.getElementById('signup').scrollIntoView({behavior: 'smooth'})">Get Free Access</button>
+                <button class="button button-primary" onclick="openSignupModal()">Get Free Access</button>
                 <button class="button button-secondary" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">See How It Works</button>
             </div>
-            
-            <div class="google-form-container">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdOZZ5Mz1Z82w8EOqvh_X1YgDtsxYkhpfx95B4ikLbus5uLEg/viewform?embedded=true""
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
         </div>
     </section>
+    
+    <!-- MODAL FOR GOOGLE FORM - HIDDEN BY DEFAULT -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeSignupModal()">×</button>
+            <h2 class="modal-title">Join 2,000+ Federal Contractors</h2>
+            <p style="margin-bottom: var(--space-lg); color: var(--color-text-secondary);">Get instant access to free SAM.gov intelligence. No credit card required.</p>
+            
+            <!-- GOOGLE FORM EMBED -->
+            <div class="google-form-container">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdOZZ5Mz1Z82w8EOqvh_X1YgDtsxYkhpfx95B4ikLbus5uLEg/viewform?embedded=true" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </div>
     
     <section class="features" id="features">
         <div class="container">
@@ -426,28 +501,31 @@
     </footer>
     
     <script>
-        function handleSignup(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            
-            // Log to console (for testing)
-            console.log('Signup:', { name, email });
-            
-            // Show success message
-            alert(`Welcome, ${name}! Check your email (${email}) for access instructions.`);
-            
-            // Reset form
-            event.target.reset();
-            
-            // In production, send to email service (Brevo, ConvertKit, etc)
-            // Example:
-            // fetch('/api/signup', {
-            //   method: 'POST',
-            //   headers: { 'Content-Type': 'application/json' },
-            //   body: JSON.stringify({ name, email, source: 'landing-page' })
-            // });
+        // Modal Functions
+        function openSignupModal() {
+            document.getElementById('signupModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
         }
+        
+        function closeSignupModal() {
+            document.getElementById('signupModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside the modal content
+        window.onclick = function(event) {
+            const modal = document.getElementById('signupModal');
+            if (event.target == modal) {
+                closeSignupModal();
+            }
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeSignupModal();
+            }
+        });
         
         function handleConsultingRequest() {
             alert('Redirecting to consulting services page...');
