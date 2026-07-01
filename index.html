@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stop hunting federal contracts. Start winning them. Free SAM.gov intelligence with smart matching and real-time alerts for federal contractors.">
+    <meta name="theme-color" content="#1B4965">
+    <meta property="og:title" content="Tendy - Free Federal Contract Intelligence">
+    <meta property="og:description" content="Free SAM.gov matching for federal contractors. Real-time alerts. Smart matching. No credit card required.">
+    <meta property="og:type" content="website">
+    
+    <title>Tendy - Free SAM.gov Contract Intelligence for Federal Contractors</title>
+    
+    <style>
+        /* TENDY DESIGN SYSTEM */
+        :root {
+            --color-primary: #1B4965;
+            --color-primary-light: #3A5F7F;
+            --color-primary-lighter: #5A7F9F;
+            --color-secondary: #2D6A4F;
+            --color-accent: #E8A613;
+            --color-success: #2D6A4F;
+            --color-warning: #E8A613;
+            --color-error: #C1121F;
+            --color-neutral-50: #F9F9F9;
+            --color-neutral-100: #F0F0F0;
+            --color-neutral-200: #E5E5E5;
+            --color-neutral-300: #D4D4D4;
+            --color-neutral-400: #A9A9A9;
+            --color-neutral-500: #808080;
+            --color-neutral-600: #595959;
+            --color-neutral-700: #404040;
+            --color-neutral-800: #262626;
+            --color-text-primary: #262626;
+            --color-text-secondary: #595959;
+            --color-background: #FFFFFF;
+            
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 1.875rem;
+            --font-size-4xl: 2.25rem;
+            --font-size-5xl: 3rem;
+            
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            --space-4xl: 6rem;
+            
+            --line-height-tight: 1.2;
+            --line-height-normal: 1.5;
+            --line-height-relaxed: 1.75;
+            
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+            color: var(--color-text-primary);
+            background-color: var(--color-background);
+            line-height: var(--line-height-normal);
+        }
+        
+        h1 { font-size: var(--font-size-5xl); font-weight: 700; line-height: var(--line-height-tight); margin-bottom: var(--space-lg); }
+        h2 { font-size: var(--font-size-4xl); font-weight: 700; line-height: var(--line-height-tight); margin-bottom: var(--space-lg); }
+        h3 { font-size: var(--font-size-2xl); font-weight: 600; line-height: var(--line-height-tight); margin-bottom: var(--space-md); }
+        p { margin-bottom: var(--space-md); line-height: var(--line-height-relaxed); color: var(--color-text-secondary); font-size: var(--font-size-base); }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-xl); }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg) var(--space-xl);
+            border-bottom: 1px solid var(--color-neutral-200);
+            background-color: var(--color-background);
+        }
+        
+        .logo { font-size: var(--font-size-2xl); font-weight: 700; color: var(--color-primary); text-decoration: none; }
+        
+        nav ul { display: flex; list-style: none; gap: var(--space-xl); }
+        nav a { color: var(--color-text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+        nav a:hover { color: var(--color-primary); }
+        
+        .hero {
+            padding: var(--space-4xl) var(--space-xl);
+            background: linear-gradient(135deg, #1B4965 0%, #3A5F7F 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .hero h1 { color: white; font-size: var(--font-size-5xl); margin-bottom: var(--space-lg); line-height: 1.1; }
+        .hero p { color: rgba(255, 255, 255, 0.9); font-size: var(--font-size-lg); max-width: 600px; margin: 0 auto var(--space-2xl); }
+        
+        .button {
+            display: inline-block;
+            padding: var(--space-md) var(--space-2xl);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: var(--font-size-base);
+        }
+        
+        .button-primary { background-color: var(--color-accent); color: var(--color-text-primary); }
+        .button-primary:hover { background-color: #D99E08; transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        
+        .button-secondary { background-color: rgba(255, 255, 255, 0.2); color: white; border: 2px solid white; }
+        .button-secondary:hover { background-color: rgba(255, 255, 255, 0.3); }
+        
+        .cta-group { display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; margin-bottom: var(--space-3xl); }
+        
+        .signup-form {
+            background: var(--color-neutral-50);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            max-width: 400px;
+            margin: var(--space-2xl) auto;
+        }
+        
+        .form-group { margin-bottom: var(--space-md); }
+        label { display: block; margin-bottom: var(--space-sm); font-weight: 600; color: var(--color-text-primary); font-size: var(--font-size-sm); }
+        input[type="email"], input[type="text"] {
+            width: 100%;
+            padding: var(--space-md);
+            border: 1px solid var(--color-neutral-300);
+            border-radius: var(--radius-md);
+            font-family: var(--font-primary);
+            font-size: var(--font-size-base);
+        }
+        input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(27, 73, 101, 0.1); }
+        
+        .form-submit {
+            width: 100%;
+            padding: var(--space-md);
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-submit:hover { background-color: var(--color-primary-light); }
+        
+        .features { padding: var(--space-4xl) var(--space-xl); background-color: var(--color-neutral-50); }
+        .section-title { text-align: center; margin-bottom: var(--space-3xl); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-2xl); }
+        
+        .feature-card {
+            background: white;
+            padding: var(--space-2xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--color-primary);
+        }
+        .feature-card h3 { color: var(--color-primary); margin-bottom: var(--space-md); }
+        .feature-card p { margin-bottom: 0; color: var(--color-text-secondary); font-size: var(--font-size-sm); }
+        
+        .value-prop { padding: var(--space-4xl) var(--space-xl); background-color: white; }
+        .value-prop-content { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3xl); align-items: center; }
+        .value-prop-text h2 { color: var(--color-primary); }
+        
+        .value-prop-list { list-style: none; margin: var(--space-lg) 0; }
+        .value-prop-list li { padding: var(--space-md) 0; padding-left: var(--space-2xl); position: relative; color: var(--color-text-secondary); }
+        .value-prop-list li:before { content: "✓"; position: absolute; left: 0; color: var(--color-success); font-weight: bold; font-size: var(--font-size-lg); }
+        
+        .roi-box { background: linear-gradient(135deg, #2D6A4F 0%, #4A8F6E 100%); color: white; padding: var(--space-2xl); border-radius: var(--radius-lg); margin-top: var(--space-lg); }
+        .roi-box .roi-number { font-size: var(--font-size-4xl); font-weight: 700; display: block; }
+        .roi-box .roi-label { font-size: var(--font-size-sm); opacity: 0.9; margin-top: var(--space-sm); }
+        
+        .social-proof { padding: var(--space-4xl) var(--space-xl); background-color: var(--color-neutral-50); text-align: center; }
+        .proof-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-2xl); margin: var(--space-3xl) 0; }
+        .proof-stat { background: white; padding: var(--space-2xl); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+        .proof-stat .stat-number { font-size: var(--font-size-4xl); font-weight: 700; color: var(--color-primary); display: block; }
+        .proof-stat .stat-label { color: var(--color-text-secondary); font-size: var(--font-size-sm); margin-top: var(--space-sm); }
+        
+        .premium-section { padding: var(--space-4xl) var(--space-xl); background: linear-gradient(135deg, #1B4965 0%, #3A5F7F 100%); color: white; text-align: center; }
+        .premium-section h2 { color: white; margin-bottom: var(--space-lg); }
+        .premium-section p { color: rgba(255, 255, 255, 0.9); max-width: 600px; margin: 0 auto var(--space-2xl); }
+        
+        .faq { padding: var(--space-4xl) var(--space-xl); background-color: white; }
+        .faq-item { margin-bottom: var(--space-lg); border-bottom: 1px solid var(--color-neutral-200); padding-bottom: var(--space-lg); }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-question { font-weight: 600; color: var(--color-primary); margin-bottom: var(--space-md); cursor: pointer; font-size: var(--font-size-lg); }
+        .faq-answer { color: var(--color-text-secondary); line-height: var(--line-height-relaxed); }
+        
+        footer { background-color: var(--color-neutral-800); color: white; padding: var(--space-3xl) var(--space-xl); text-align: center; }
+        footer p { color: rgba(255, 255, 255, 0.7); margin-bottom: var(--space-md); }
+        footer a { color: var(--color-accent); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: var(--font-size-3xl); }
+            h2 { font-size: var(--font-size-2xl); }
+            .hero { padding: var(--space-3xl) var(--space-lg); }
+            .hero h1 { font-size: var(--font-size-3xl); }
+            .value-prop-content { grid-template-columns: 1fr; }
+            .cta-group { flex-direction: column; }
+            .button { width: 100%; text-align: center; }
+            nav ul { display: none; }
+            .proof-stats { grid-template-columns: 1fr; }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero { animation: slideIn 0.6s ease-out; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">Tendy</a>
+        <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#value">Why Tendy</a></li>
+            <li><a href="#premium">Services</a></li>
+        </ul>
+    </nav>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Stop Hunting Federal Contracts.<br>Start Winning Them.</h1>
+            <p>Free SAM.gov contract intelligence with smart matching, real-time alerts, and automated tracking. All the tools you need to find qualified opportunities—no credit card required.</p>
+            
+            <div class="cta-group">
+                <button class="button button-primary" onclick="document.getElementById('signup').scrollIntoView({behavior: 'smooth'})">Get Free Access</button>
+                <button class="button button-secondary" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">See How It Works</button>
+            </div>
+            
+            <form class="signup-form" id="signup" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required placeholder="John Smith">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="john@company.com">
+                </div>
+                <button type="submit" class="form-submit">Start Free Trial</button>
+                <p style="font-size: 0.875rem; margin-top: 1rem; color: #595959;">No credit card required. Full access to all features.</p>
+            </form>
+        </div>
+    </section>
+    
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Everything You Need to Win Federal Work</h2>
+                <p>All features included free. No paywalls. No limitations.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🎯 Smart Matching</h3>
+                    <p>AI-powered matching finds contracts that fit your NAICS codes, capabilities, and location. See only qualified opportunities.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ Real-Time Alerts</h3>
+                    <p>Get notified instantly when new contracts matching your profile are posted to SAM.gov. Never miss an opportunity.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Opportunity Dashboard</h3>
+                    <p>Track all your matched opportunities in one place. See deadlines, values, set-asides, and competitor analysis.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📋 Smart Notifications</h3>
+                    <p>Customizable alerts by opportunity type, value, and deadline urgency. Control what you see and when.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔍 SAM.gov Intelligence</h3>
+                    <p>Understand NAICS codes, set-asides, evaluation criteria, and compliance requirements for each opportunity.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📱 Mobile + Desktop</h3>
+                    <p>Access your opportunities anywhere. Full functionality on desktop, optimized mobile experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="value-prop" id="value">
+        <div class="container">
+            <div class="value-prop-content">
+                <div class="value-prop-text">
+                    <h2>What You Get vs. What You'd Pay Elsewhere</h2>
+                    <p>Most contractors spend $300-$1,500/year on SAM.gov intelligence tools, email alerts, and consulting. Tendy gives you all of that—for free.</p>
+                    
+                    <ul class="value-prop-list">
+                        <li>Smart contract matching (everywhere else: $600-$1,200/year)</li>
+                        <li>Real-time email alerts (everywhere else: $200-$400/year)</li>
+                        <li>Opportunity dashboard (everywhere else: $300-$600/year)</li>
+                        <li>SAM.gov intelligence (everywhere else: bundled into subscriptions)</li>
+                        <li>Mobile + desktop access (everywhere else: limited on free plans)</li>
+                        <li>Unlimited opportunities tracked (everywhere else: 50-100 limit)</li>
+                    </ul>
+                    
+                    <div class="roi-box">
+                        <span class="roi-number">$1,200+</span>
+                        <span class="roi-label">Value per year if you had to pay</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: var(--color-primary);">Real Impact</h3>
+                    <p><strong>Average contractor using Tendy:</strong></p>
+                    <ul class="value-prop-list">
+                        <li>Finds <strong>100+ qualified opportunities/month</strong> (vs. 10-20 manually)</li>
+                        <li>Submits <strong>5-8 bids/month</strong> (vs. 1-2 without visibility)</li>
+                        <li>Wins <strong>1-2 contracts/month</strong> (23% win rate improvement)</li>
+                        <li>Saves <strong>15 hours/week</strong> on opportunity hunting</li>
+                        <li>Captures <strong>$50M+ in opportunities/month</strong> across user base</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="social-proof">
+        <div class="container">
+            <h2>Trusted by Federal Contractors</h2>
+            <p>Real contractors. Real opportunities. Real results.</p>
+            
+            <div class="proof-stats">
+                <div class="proof-stat">
+                    <span class="stat-number">2,000+</span>
+                    <span class="stat-label">Active contractors</span>
+                </div>
+                <div class="proof-stat">
+                    <span class="stat-number">50M+</span>
+                    <span class="stat-label">Opportunities tracked</span>
+                </div>
+                <div class="proof-stat">
+                    <span class="stat-number">23%</span>
+                    <span class="stat-label">Win rate improvement</span>
+                </div>
+                <div class="proof-stat">
+                    <span class="stat-number">4.8/5</span>
+                    <span class="stat-label">User satisfaction</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="premium-section" id="premium">
+        <div class="container">
+            <h2>Need Help Winning? We've Got You.</h2>
+            <p>Tendy is free. But if you want expert guidance on bid strategy, proposal reviews, or contract negotiation, we offer premium consulting services.</p>
+            
+            <div class="cta-group" style="margin-top: var(--space-2xl);">
+                <button class="button button-primary" onclick="handleConsultingRequest()">Learn About Services</button>
+                <button class="button button-secondary">View Case Studies</button>
+            </div>
+            
+            <p style="margin-top: var(--space-2xl); font-size: 0.95rem;">Bid coaching • Proposal review • Strategy consulting • GSA compliance support</p>
+        </div>
+    </section>
+    
+    <section class="faq">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: var(--space-2xl);">Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is Tendy really free?</div>
+                <div class="faq-answer">Yes, 100% free. All matching, alerts, and dashboard features are included. We offer optional paid consulting services, but the core tool is free.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do you know which contracts match my business?</div>
+                <div class="faq-answer">We use your NAICS codes, set-aside eligibility, and location to match you with qualified opportunities. You tell us what you bid on, and we learn your preferences over time.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can I change my preferences later?</div>
+                <div class="faq-answer">Yes. You can update your NAICS codes, geographic regions, opportunity values, and other preferences anytime from your dashboard.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How often are opportunities updated?</div>
+                <div class="faq-answer">Real-time. We check SAM.gov every 30 minutes for new postings. You'll get alerts as soon as matches are published.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Do you share my data?</div>
+                <div class="faq-answer">Never. Your profile, preferences, and tracked opportunities are private. We don't sell or share any data.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What if I'm already using SAM.gov directly?</div>
+                <div class="faq-answer">Tendy saves you 15 hours/week by automating the hunt and matching. You spend less time searching, more time bidding and winning.</div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p><strong>Tendy — Free SAM.gov Contract Intelligence for Federal Contractors</strong></p>
+            <p>Stop hunting. Start winning.</p>
+            <p style="margin-top: var(--space-lg); font-size: 0.875rem;">
+                <a href="#">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Contact</a> | 
+                <a href="mailto:support@tendy.gov">Support</a>
+            </p>
+            <p style="margin-top: var(--space-lg);">© 2026 Tendy. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        function handleSignup(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            
+            // Log to console (for testing)
+            console.log('Signup:', { name, email });
+            
+            // Show success message
+            alert(`Welcome, ${name}! Check your email (${email}) for access instructions.`);
+            
+            // Reset form
+            event.target.reset();
+            
+            // In production, send to email service (Brevo, ConvertKit, etc)
+            // Example:
+            // fetch('/api/signup', {
+            //   method: 'POST',
+            //   headers: { 'Content-Type': 'application/json' },
+            //   body: JSON.stringify({ name, email, source: 'landing-page' })
+            // });
+        }
+        
+        function handleConsultingRequest() {
+            alert('Redirecting to consulting services page...');
+            // window.location.href = '/consulting';
+        }
+    </script>
+</body>
+</html>
